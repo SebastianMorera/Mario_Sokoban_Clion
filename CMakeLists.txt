@@ -15,7 +15,7 @@ project(Mario_Sokoban C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMAKE")
-set(SOURCE_FILES    src/main.c Libraries/editeur.c Libraries/editeur.h Libraries/jeu.c Libraries/jeu.h Libraries/fichiers.c Libraries/fichiers.h Libraries/constantes.h)
+set(SOURCE_FILES    src/main.c Libraries/editeur.c Libraries/editeur.h Libraries/jeu.c Libraries/jeu.h Libraries/fichiers.c Libraries/fichiers.h Libraries/constantes.h Libraries/initialize.c Libraries/initialize.h)
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
 Message("")
@@ -24,7 +24,7 @@ Message("")
 
 
 # ------- Executable ----- #
-ADD_EXECUTABLE(Mario_Sokoban ${SOURCE_FILES} Libraries/editeur.c Libraries/editeur.h Libraries/jeu.c Libraries/jeu.h Libraries/constantes.h Libraries/fichiers.c Libraries/fichiers.h)
+ADD_EXECUTABLE(Mario_Sokoban ${SOURCE_FILES} Libraries/editeur.c Libraries/editeur.h Libraries/jeu.c Libraries/jeu.h Libraries/constantes.h Libraries/fichiers.c Libraries/fichiers.h Libraries/initialize.c Libraries/initialize.h)
 
 # ------- End Executable - #
 
