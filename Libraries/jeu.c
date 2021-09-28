@@ -15,40 +15,39 @@ void jouer(SDL_Renderer *renderer)
     SDL_Event event;
 
     // Chargement des sprites (décors, personnage...)
-    mur = IMG_Load("mur.jpg");
+    mur = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/mur.jpg");
     SDL_Texture *textureMur = SDL_CreateTextureFromSurface(renderer, mur);
     SDL_FreeSurface(mur);
 
-    caisse = IMG_Load("caisse.jpg");
+    caisse = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/caisse.jpg");
     SDL_Texture *textureCaisse = SDL_CreateTextureFromSurface(renderer, caisse);
     SDL_FreeSurface(caisse);
 
-    caisseOK = IMG_Load("caisse_ok.jpg");
+    caisseOK = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/caisse_ok.jpg");
     SDL_Texture *textureCaisseOK = SDL_CreateTextureFromSurface(renderer, caisseOK);
     SDL_FreeSurface(caisseOK);
 
-    objectif = IMG_Load("objectif.png");
+    objectif = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/objectif.png");
     SDL_Texture *textureObjectif = SDL_CreateTextureFromSurface(renderer, objectif);
     SDL_FreeSurface(objectif);
 
-    mario[BAS] = IMG_Load("mario_bas.gif");
+    mario[BAS] = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/mario_bas.gif");
     SDL_Texture *textureMario_Bas = SDL_CreateTextureFromSurface(renderer, mario[BAS]);
     marioActuel = mario[BAS]; // Mario sera dirigé vers le bas au départ
     SDL_Texture *textureMarioActuel = SDL_CreateTextureFromSurface(renderer, marioActuel);
     SDL_FreeSurface(mario[BAS]);
 
-    mario[GAUCHE] = IMG_Load("mario_gauche.gif");
+    mario[GAUCHE] = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/mario_gauche.gif");
     SDL_Texture *textureMario_Gauche = SDL_CreateTextureFromSurface(renderer, mario[GAUCHE]);
     SDL_FreeSurface(mario[GAUCHE]);
 
-    mario[HAUT] = IMG_Load("mario_haut.gif");
+    mario[HAUT] = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/mario_haut.gif");
     SDL_Texture *textureMario_Haut = SDL_CreateTextureFromSurface(renderer, mario[HAUT]);
     SDL_FreeSurface(mario[HAUT]);
 
-    mario[DROITE] = IMG_Load("mario_droite.gif");
+    mario[DROITE] = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/mario_droite.gif");
     SDL_Texture *textureMario_Droite = SDL_CreateTextureFromSurface(renderer, mario[DROITE]);
     SDL_FreeSurface(mario[DROITE]);
-
 
     // Chargement du niveau
     if (!chargerNiveau(carte))

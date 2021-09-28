@@ -11,7 +11,7 @@ int chargerNiveau(int niveau[][NB_BLOCS_HAUTEUR])
     int i = 0, j = 0;
 
 
-    fichier = fopen("/Users/sebastianmorera/Documents/C Projects/Mario_Sokoban/Mario_Sokoban/niveaux.lvl", "r");
+    fichier = fopen("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources//niveaux.lvl", "r");
     if (fichier == NULL)
         return 0;
 

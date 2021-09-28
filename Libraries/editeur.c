@@ -15,19 +15,19 @@ void editeur(SDL_Renderer *renderer)
     int carte[NB_BLOCS_LARGEUR][NB_BLOCS_HAUTEUR] = {0};
 
     // Chargement des objets et du niveau
-    mur = IMG_Load("mur.jpg");
+    mur = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/mur.jpg");
     SDL_Texture *textureMur = SDL_CreateTextureFromSurface(renderer, mur);
     SDL_FreeSurface(mur);
 
-    caisse = IMG_Load("caisse.jpg");
+    caisse = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/caisse.jpg");
     SDL_Texture *textureCaisse = SDL_CreateTextureFromSurface(renderer, caisse);
     SDL_FreeSurface(caisse);
 
-    objectif = IMG_Load("objectif.png");
+    objectif = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/objectif.png");
     SDL_Texture *textureObjectif = SDL_CreateTextureFromSurface(renderer, objectif);
     SDL_FreeSurface(objectif);
 
-    mario = IMG_Load("mario_bas.gif");
+    mario = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/mario_bas.gif");
     SDL_Texture *textureMario = SDL_CreateTextureFromSurface(renderer, mario);
     SDL_FreeSurface(mario);
 

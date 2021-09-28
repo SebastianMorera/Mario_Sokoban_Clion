@@ -32,6 +32,7 @@ int main()
 
     window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
     SDL_SetWindowTitle(window, title);
     printf("Created Window and Renderer %dx%d\n", WINDOW_WIDTH, WINDOW_HEIGHT);
 
@@ -66,18 +67,12 @@ int main()
 
                     case SDLK_KP_1: // Demande à jouer
                         jouer(renderer);
-
-                        SDL_QueryTexture(textureMenu, NULL, NULL, &positionMenu.w, &positionMenu.h);
-                        SDL_RenderCopy(renderer, textureMenu, NULL, &positionMenu);
-                        SDL_RenderPresent(renderer); // Afficher l'image de fond
+                        load_menu(positionMenu, menu, textureMenu,window,renderer);
                         break;
 
                     case SDLK_KP_2: // Demande l'éditeur de niveaux
                         editeur(renderer);
-
-                        SDL_QueryTexture(textureMenu, NULL, NULL, &positionMenu.w, &positionMenu.h);
-                        SDL_RenderCopy(renderer, textureMenu, NULL, &positionMenu);
-                        SDL_RenderPresent(renderer); // Afficher l'image de fond
+                        load_menu(positionMenu, menu, textureMenu,window,renderer);
                         break;
 
                     default:
