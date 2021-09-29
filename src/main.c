@@ -78,12 +78,7 @@ int main()
                         editeur(renderer);
                         load_menu(positionMenu, menu, textureMenu,window,renderer);
                         break;
-
-                    case SDLK_KP_3:
-                        levelCompleted(renderer);
-                        load_menu(positionMenu, menu, textureMenu,window,renderer);
-                        break;
-
+                        
                     default:
                         break;
                 }
