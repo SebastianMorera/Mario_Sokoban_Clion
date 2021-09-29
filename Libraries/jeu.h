@@ -7,6 +7,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 #include "constantes.h"
 #include "fichiers.h"
@@ -14,5 +15,6 @@
 void jouer(SDL_Renderer *renderer);
 void deplacerJoueur(int carte[][NB_BLOCS_HAUTEUR], SDL_Rect *pos, int direction);
 void deplacerCaisse(int *premiereCase, int *secondeCase);
+void levelCompleted(SDL_Renderer *renderer);
 
 #endif //MARIO_SOKOBAN_JEU_H

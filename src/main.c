@@ -1,12 +1,13 @@
 //
 // Created by Sebastian Morera on 2021-09-21.
 //
-//#include <SDL_ttf.h>
+//
 //#include <SDL_mixer.h>
 
 #include <stdio.h>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 #include "constantes.h"
 #include "initialize.h"
@@ -46,6 +47,9 @@ int main()
     SDL_Rect positionMenu = {.x = 0, .y = 0};
     load_menu(positionMenu, menu, textureMenu,window,renderer);
 
+    /// Init TTF library
+    TTF_Init();
+
     /// main loop (Events)
     SDL_Event event;
 
@@ -61,17 +65,22 @@ int main()
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym)
                 {
-                    case SDLK_ESCAPE: /* Appui sur la touche Echap, on arrête le programme */
+                    case SDLK_ESCAPE:   // Press the escape key to stop the program
                         continuer = 0;
                         break;
 
-                    case SDLK_KP_1: // Demande à jouer
+                    case SDLK_KP_1:     // User wants to play
                         jouer(renderer);
                         load_menu(positionMenu, menu, textureMenu,window,renderer);
                         break;
 
-                    case SDLK_KP_2: // Demande l'éditeur de niveaux
+                    case SDLK_KP_2:     // User want to edit levels
                         editeur(renderer);
+                        load_menu(positionMenu, menu, textureMenu,window,renderer);
+                        break;
+
+                    case SDLK_KP_3:
+                        levelCompleted(renderer);
                         load_menu(positionMenu, menu, textureMenu,window,renderer);
                         break;
 

@@ -169,6 +169,7 @@ void jouer(SDL_Renderer *renderer)
 
     } // Fin du while(continuer)
 
+    levelCompleted(renderer);
 }
 
 void deplacerJoueur(int carte[][NB_BLOCS_HAUTEUR], SDL_Rect *pos, int direction)
@@ -252,5 +253,42 @@ void deplacerCaisse(int *premiereCase, int *secondeCase)
             *premiereCase = OBJECTIF;
         else
             *premiereCase = VIDE;
+    }
+}
+
+void levelCompleted(SDL_Renderer *renderer)
+{
+    SDL_RenderClear(renderer); // Clear the entire screen
+    SDL_Color colorBlack = {0, 0, 0}, colorWhite = {255, 255, 255};
+
+    TTF_Font *police = TTF_OpenFont("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/angelina.ttf", 32);
+
+    /// Congratulations text
+    char *texteAfficher = "Congratulations, level solved !";
+    SDL_Texture *textureTexte = NULL;
+    SDL_Surface* surfaceTexte = TTF_RenderText_Shaded(police, texteAfficher, colorBlack, colorWhite);
+    textureTexte = SDL_CreateTextureFromSurface(renderer, surfaceTexte);
+    SDL_FreeSurface(surfaceTexte);
+
+    SDL_Rect positionTexte; //create a rect
+    positionTexte.x = 50;  //controls the rect's x coordinate
+    positionTexte.y = 150; // controls the rect's y coordinte
+    TTF_SizeText(police, texteAfficher, &positionTexte.w, &positionTexte.h);
+    SDL_RenderCopy(renderer, textureTexte, NULL, &positionTexte);
+    SDL_RenderPresent(renderer); // Afficher l'image de fond
+
+    /// Timer initialization
+    int tempsActuel = 0, tempsPrecedent = 0, compteur = 0;
+    tempsActuel = SDL_GetTicks();
+
+    while (compteur <= 3000)
+    {
+        tempsActuel = SDL_GetTicks();
+
+        if (tempsActuel - tempsPrecedent >= 100) /* Si 100 ms se sont écoulées depuis le dernier tour de boucle */
+        {
+            compteur += 100;
+            tempsPrecedent = tempsActuel; /* On met à jour le tempsPrecedent */
+        }
     }
 }
