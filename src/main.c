@@ -1,13 +1,12 @@
 //
 // Created by Sebastian Morera on 2021-09-21.
 //
-//
-//#include <SDL_mixer.h>
 
 #include <stdio.h>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 #include "constantes.h"
 #include "initialize.h"
@@ -49,6 +48,9 @@ int main()
 
     /// Init TTF library
     TTF_Init();
+
+    /// Init Mixer library
+    init_audio();
 
     /// main loop (Events)
     SDL_Event event;

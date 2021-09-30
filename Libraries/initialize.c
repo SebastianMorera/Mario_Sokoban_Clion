@@ -81,6 +81,15 @@ void load_menu(SDL_Rect positionMenu, SDL_Surface *menu, SDL_Texture *textureMen
     SDL_RenderPresent(renderer); // Afficher l'image de fond
 }
 
+void init_audio()
+{
+    if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) != 0) {
+        printf("[Error] Error Initialising Audio : %s\n", SDL_GetError());
+    } else {
+        printf("Audio Initialised\n");
+    }
+}
+
 void SDL_ExitWithDestruction(SDL_Renderer *renderer, SDL_Window *window, const char *message)
 {
     SDL_DestroyRenderer(renderer);

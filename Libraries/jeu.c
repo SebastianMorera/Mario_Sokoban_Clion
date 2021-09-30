@@ -67,6 +67,8 @@ void jouer(SDL_Renderer *renderer)
         }
     }
 
+    play_audio_start();
+
     while(continuer)
     {
         SDL_WaitEvent(&event);
@@ -169,7 +171,11 @@ void jouer(SDL_Renderer *renderer)
 
     } // Fin du while(continuer)
 
-    levelCompleted(renderer);
+    if (!objectifsRestants)
+    {
+        play_audio_completed();
+        levelCompleted(renderer);
+    }
 }
 
 void deplacerJoueur(int carte[][NB_BLOCS_HAUTEUR], SDL_Rect *pos, int direction)
@@ -290,5 +296,23 @@ void levelCompleted(SDL_Renderer *renderer)
             compteur += 100;
             tempsPrecedent = tempsActuel; /* On met à jour le tempsPrecedent */
         }
+    }
+}
+
+void play_audio_start()
+{
+    Mix_Music *musicStart = NULL;
+    musicStart = Mix_LoadMUS("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/Level_Start.wav");
+    if (Mix_PlayMusic(musicStart, 1) != 0) {
+        printf("[Error] Could not play music : %s \n", Mix_GetError());
+    }
+}
+
+void play_audio_completed()
+{
+    Mix_Music *musicStart = NULL;
+    musicStart = Mix_LoadMUS("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/Level_completed.wav");
+    if (Mix_PlayMusic(musicStart, 1) != 0) {
+        printf("[Error] Could not play music : %s \n", Mix_GetError());
     }
 }
