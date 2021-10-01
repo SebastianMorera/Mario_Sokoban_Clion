@@ -10,7 +10,7 @@ void editeur(SDL_Renderer *renderer)
     SDL_Rect position, positionObject;
     SDL_Event event;
 
-    int continuer = 1, clicGaucheEnCours = 0, clicDroitEnCours = 0;
+    int continuer = 1, clicGaucheEnCours = 0, clicDroitEnCours = 0, nbMario = 0;
     int objetActuel = MUR, i = 0, j = 0;
     int carte[NB_BLOCS_LARGEUR][NB_BLOCS_HAUTEUR] = {0};
 
@@ -48,6 +48,8 @@ void editeur(SDL_Renderer *renderer)
     if (!chargerNiveau(carte))
         exit(EXIT_FAILURE);
 
+    nbMario = howManyMarios(carte);
+
     SDL_ShowCursor(SDL_DISABLE);
 
     while(continuer)
@@ -63,11 +65,28 @@ void editeur(SDL_Renderer *renderer)
                 if (event.button.button == SDL_BUTTON_LEFT)
                 {
                     // On met l'objet actuellement choisi (mur, caisse...) à l'endroit du clic
-                    carte[event.button.x / TAILLE_BLOC][event.button.y / TAILLE_BLOC] = objetActuel;
-                    clicGaucheEnCours = 1; // On retient qu'un bouton est enfoncé
+                    if(objetActuel == MARIO)
+                    {
+                        nbMario = howManyMarios(carte);
+                        if(nbMario != 1)
+                        {
+                            carte[event.button.x / TAILLE_BLOC][event.button.y / TAILLE_BLOC] = objetActuel;
+                            clicGaucheEnCours = 1; // On retient qu'un bouton est enfoncé
+                        }
+                    }
+                    else
+                    {
+                        carte[event.button.x / TAILLE_BLOC][event.button.y / TAILLE_BLOC] = objetActuel;
+                        clicGaucheEnCours = 1; // On retient qu'un bouton est enfoncé
+                    }
                 }
                 else if (event.button.button == SDL_BUTTON_RIGHT) // Clic droit pour effacer
                 {
+                    if(objetActuel == MARIO)
+                    {
+                        if(nbMario == 1)
+                            nbMario--;
+                    }
                     carte[event.button.x / TAILLE_BLOC][event.button.y /TAILLE_BLOC] = VIDE;
                     clicDroitEnCours = 1;
                 }
@@ -184,9 +203,31 @@ void editeur(SDL_Renderer *renderer)
                 break;
         }
 
+        printf("Le nombre de mario est: %d \n",nbMario);
+
         // Mise à jour de l'écran
         SDL_RenderPresent(renderer);
 
     } // Fin du while
 
+}
+
+int howManyMarios(int carte[][NB_BLOCS_HAUTEUR])
+{
+    int nbMario = 0, i = 0, j = 0;
+
+    for (i = 0 ; i < NB_BLOCS_LARGEUR ; i++)
+    {
+        for (j = 0 ; j < NB_BLOCS_HAUTEUR ; j++)
+        {
+            switch(carte[i][j])
+            {
+                case MARIO:
+                    nbMario++;
+                    break;
+            }
+        }
+    }
+
+    return nbMario;
 }
