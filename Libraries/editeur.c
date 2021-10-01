@@ -6,7 +6,7 @@
 
 void editeur(SDL_Renderer *renderer)
 {
-    SDL_Surface *mur = NULL, *caisse = NULL, *objectif = NULL, *mario = NULL;
+    SDL_Surface *mur = NULL, *caisse = NULL, *objectif = NULL, *mario = NULL, *caisseOk = NULL;
     SDL_Rect position, positionObject;
     SDL_Event event;
 
@@ -37,7 +37,13 @@ void editeur(SDL_Renderer *renderer)
     SDL_Texture *textureMario = SDL_CreateTextureFromSurface(renderer, mario);
     SDL_FreeSurface(mario);
     SDL_QueryTexture(textureMario, NULL, NULL, &position.w, &position.h);
-    SDL_QueryTexture(textureObjectif, NULL, NULL, &positionObject.w, &positionObject.h);
+    SDL_QueryTexture(textureMario, NULL, NULL, &positionObject.w, &positionObject.h);
+
+    caisseOk = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/caisse_ok.jpg");
+    SDL_Texture *textureCaisseOk = SDL_CreateTextureFromSurface(renderer, caisseOk);
+    SDL_FreeSurface(caisseOk);
+    SDL_QueryTexture(textureCaisseOk, NULL, NULL, &position.w, &position.h);
+    SDL_QueryTexture(textureCaisseOk, NULL, NULL, &positionObject.w, &positionObject.h);
 
     if (!chargerNiveau(carte))
         exit(EXIT_FAILURE);
@@ -117,6 +123,10 @@ void editeur(SDL_Renderer *renderer)
                     case SDLK_KP_4:
                         objetActuel = MARIO;
                         break;
+
+                    case SDLK_KP_5:
+                        objetActuel = CAISSE_OK;
+                        break;
                 }
                 break;
         }
@@ -146,6 +156,9 @@ void editeur(SDL_Renderer *renderer)
                     case MARIO:
                         SDL_RenderCopy(renderer, textureMario, NULL, &position);
                         break;
+                    case CAISSE_OK:
+                        SDL_RenderCopy(renderer, textureCaisseOk, NULL, &position);
+                        break;
                 }
             }
         }
@@ -164,7 +177,9 @@ void editeur(SDL_Renderer *renderer)
             case MARIO:
                 SDL_RenderCopy(renderer, textureMario, NULL, &positionObject);
                 break;
-
+            case CAISSE_OK:
+                SDL_RenderCopy(renderer, textureCaisseOk, NULL, &positionObject);
+                break;
             default:
                 break;
         }
