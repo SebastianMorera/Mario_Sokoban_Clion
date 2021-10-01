@@ -7,7 +7,7 @@
 void editeur(SDL_Renderer *renderer)
 {
     SDL_Surface *mur = NULL, *caisse = NULL, *objectif = NULL, *mario = NULL;
-    SDL_Rect position;
+    SDL_Rect position, positionObject;
     SDL_Event event;
 
     int continuer = 1, clicGaucheEnCours = 0, clicDroitEnCours = 0;
@@ -18,21 +18,31 @@ void editeur(SDL_Renderer *renderer)
     mur = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/mur.jpg");
     SDL_Texture *textureMur = SDL_CreateTextureFromSurface(renderer, mur);
     SDL_FreeSurface(mur);
+    SDL_QueryTexture(textureMur, NULL, NULL, &position.w, &position.h);
+    SDL_QueryTexture(textureMur, NULL, NULL, &positionObject.w, &positionObject.h);
 
     caisse = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/caisse.jpg");
     SDL_Texture *textureCaisse = SDL_CreateTextureFromSurface(renderer, caisse);
     SDL_FreeSurface(caisse);
+    SDL_QueryTexture(textureCaisse, NULL, NULL, &position.w, &position.h);
+    SDL_QueryTexture(textureCaisse, NULL, NULL, &positionObject.w, &positionObject.h);
 
     objectif = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/objectif.png");
     SDL_Texture *textureObjectif = SDL_CreateTextureFromSurface(renderer, objectif);
     SDL_FreeSurface(objectif);
+    SDL_QueryTexture(textureObjectif, NULL, NULL, &position.w, &position.h);
+    SDL_QueryTexture(textureObjectif, NULL, NULL, &positionObject.w, &positionObject.h);
 
     mario = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/mario_bas.gif");
     SDL_Texture *textureMario = SDL_CreateTextureFromSurface(renderer, mario);
     SDL_FreeSurface(mario);
+    SDL_QueryTexture(textureMario, NULL, NULL, &position.w, &position.h);
+    SDL_QueryTexture(textureObjectif, NULL, NULL, &positionObject.w, &positionObject.h);
 
     if (!chargerNiveau(carte))
         exit(EXIT_FAILURE);
+
+    SDL_ShowCursor(SDL_DISABLE);
 
     while(continuer)
     {
@@ -65,6 +75,8 @@ void editeur(SDL_Renderer *renderer)
                 break;
 
             case SDL_MOUSEMOTION:
+                positionObject.x = event.motion.x - (TAILLE_BLOC/2);
+                positionObject.y = event.motion.y - (TAILLE_BLOC/2);
                 if (clicGaucheEnCours) // Si on déplace la souris et que le bouton gauche de la souris est enfoncé
                 {
                     carte[event.motion.x / TAILLE_BLOC][event.motion.y / TAILLE_BLOC] = objetActuel;
@@ -123,23 +135,38 @@ void editeur(SDL_Renderer *renderer)
                 switch(carte[i][j])
                 {
                     case MUR:
-                        SDL_QueryTexture(textureMur, NULL, NULL, &position.w, &position.h);
                         SDL_RenderCopy(renderer, textureMur, NULL, &position);
                         break;
                     case CAISSE:
-                        SDL_QueryTexture(textureCaisse, NULL, NULL, &position.w, &position.h);
                         SDL_RenderCopy(renderer, textureCaisse, NULL, &position);
                         break;
                     case OBJECTIF:
-                        SDL_QueryTexture(textureObjectif, NULL, NULL, &position.w, &position.h);
                         SDL_RenderCopy(renderer, textureObjectif, NULL, &position);
                         break;
                     case MARIO:
-                        SDL_QueryTexture(textureMario, NULL, NULL, &position.w, &position.h);
                         SDL_RenderCopy(renderer, textureMario, NULL, &position);
                         break;
                 }
             }
+        }
+
+        switch(objetActuel)
+        {
+            case MUR:
+                SDL_RenderCopy(renderer, textureMur, NULL, &positionObject);
+                break;
+            case CAISSE:
+                SDL_RenderCopy(renderer, textureCaisse, NULL, &positionObject);
+                break;
+            case OBJECTIF:
+                SDL_RenderCopy(renderer, textureObjectif, NULL, &positionObject);
+                break;
+            case MARIO:
+                SDL_RenderCopy(renderer, textureMario, NULL, &positionObject);
+                break;
+
+            default:
+                break;
         }
 
         // Mise à jour de l'écran
