@@ -14,7 +14,7 @@ void editeur(SDL_Renderer *renderer)
     int objetActuel = MUR, i = 0, j = 0;
     int carte[NB_BLOCS_LARGEUR][NB_BLOCS_HAUTEUR] = {0};
 
-    // Chargement des objets et du niveau
+    // Loading of objects and level
     mur = IMG_Load("/Users/sebastianmorera/Documents/Programmation/C Projects/Clion/Mario_Sokoban/Images et resources/mur.jpg");
     SDL_Texture *textureMur = SDL_CreateTextureFromSurface(renderer, mur);
     SDL_FreeSurface(mur);
@@ -150,10 +150,9 @@ void editeur(SDL_Renderer *renderer)
                 break;
         }
 
-        /* On efface l'écran */
-        SDL_RenderClear(renderer); // Clear the entire screen to our selected color.
+        SDL_RenderClear(renderer); // Clear the entire screen
 
-        // Placement des objets à l'écran
+        // Positioning of our objects on the screen
         for (i = 0 ; i < NB_BLOCS_LARGEUR ; i++)
         {
             for (j = 0 ; j < NB_BLOCS_HAUTEUR ; j++)
@@ -203,12 +202,9 @@ void editeur(SDL_Renderer *renderer)
                 break;
         }
 
-        printf("Le nombre de mario est: %d \n",nbMario);
-
-        // Mise à jour de l'écran
         SDL_RenderPresent(renderer);
 
-    } // Fin du while
+    } // End of while loop
 
 }
 
